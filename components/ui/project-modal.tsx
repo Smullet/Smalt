@@ -24,120 +24,113 @@ const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) => {
   if (!isOpen) return null
 
   return (
-    <div className="Slide1" style={{width: 1920, height: 1979, position: 'relative', overflow: 'hidden'}}>
-      <div className="Container" style={{height: 900, paddingTop: 96, paddingBottom: 128, left: 470, top: 0, position: 'absolute', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', gap: 96, display: 'inline-flex'}}>
-        <div className="Image" style={{width: 980, position: 'relative', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 24, display: 'flex'}}>
-          <div className="Image" style={{width: 980, height: 552, position: 'relative'}}>
-            <div className="ImageBlurred" style={{width: 980, height: 551.25, left: 0, top: 0, position: 'absolute', opacity: 0.75, boxShadow: '96px 96px 96px', overflow: 'hidden', borderRadius: 39.20, filter: 'blur(48px)'}}>
+    <div className="fixed inset-0 bg-white z-50 overflow-y-auto">
+      <div className="absolute top-8 right-8 flex items-center gap-2 px-4 py-2 rounded-full bg-[#B6BFDE] cursor-pointer" onClick={onClose}>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-[#123293]">
+          <path d="M6 18L18 6M6 6L18 18" stroke="currentColor" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+        <span className="text-[#123293] text-[13px] font-bold font-inter leading-[15.6px]">ESC</span>
+      </div>
+
+      <div className="min-h-screen pt-24 pb-32 px-8">
+        <div className="max-w-[980px] mx-auto">
+          <div className="relative w-[980px] h-[552px] mb-6">
+            {/* Image floutée en arrière-plan */}
+            <div className="absolute inset-0 opacity-75 overflow-hidden rounded-[39.2px] shadow-[96px_96px_96px_rgba(0,0,0,0.1)] blur-[48px]">
               <Image
                 src={project.images[0]}
                 alt={project.title}
-                width={980}
-                height={551}
-                style={{left: 0, top: -0.23, position: 'absolute'}}
+                fill
+                className="object-cover"
                 priority
               />
             </div>
-            <div className="Image" style={{width: 980, height: 551.25, left: 0, top: 0, position: 'absolute', overflow: 'hidden', borderRadius: 39.20}}>
+            {/* Image principale */}
+            <div className="absolute inset-0 overflow-hidden rounded-[39.2px]">
               <Image
                 src={project.images[0]}
                 alt={project.title}
-                width={980}
-                height={551}
-                style={{left: 0, top: -0.23, position: 'absolute'}}
+                fill
+                className="object-cover"
                 priority
               />
             </div>
           </div>
-          <div className="Miniatures" style={{left: 24, top: 503, position: 'absolute', justifyContent: 'flex-start', alignItems: 'center', gap: 24, display: 'inline-flex'}}>
+
+          {/* Miniatures */}
+          <div className="flex gap-6 mb-12">
             {project.images.slice(1).map((image, index) => (
               <div
                 key={index}
-                className="Image"
-                style={{
-                  width: 128,
-                  height: 96,
-                  position: 'relative',
-                  overflow: 'hidden',
-                  borderRadius: 12,
-                  ...(index === 0
-                    ? {
-                        boxShadow: '0px 8px 48px rgba(195.82, 76.50, 255, 0.24)',
-                        outline: '3px var(--Gradiant, #7B8CC3) solid'
-                      }
-                    : {
-                        outline: '1px var(--text-neutral-soft, #AFABB9) solid',
-                        outlineOffset: '-1px'
-                      }
-                  )
-                }}
+                className={`relative w-[128px] h-[96px] overflow-hidden rounded-xl ${
+                  index === 0
+                    ? 'shadow-[0px_8px_48px_rgba(195,76,255,0.24)] outline outline-[3px] outline-[#7B8CC3]'
+                    : 'outline outline-[1px] outline-[#AFABB9] -outline-offset-[1px]'
+                }`}
               >
                 <Image
                   src={image}
                   alt={`Image ${index + 2}`}
-                  width={128}
-                  height={96}
-                  style={{left: 0, top: 0.08, position: 'absolute'}}
+                  fill
+                  className="object-cover"
                 />
               </div>
             ))}
           </div>
-        </div>
-        <div className="Content" style={{width: 980, paddingLeft: 24, paddingRight: 24, justifyContent: 'flex-start', alignItems: 'flex-start', gap: 32, display: 'inline-flex'}}>
-          <div className="ContentText" style={{flex: '1 1 0', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', gap: 32, display: 'inline-flex'}}>
-            <div style={{alignSelf: 'stretch', justifyContent: 'center', display: 'flex', flexDirection: 'column', color: 'var(--text-neutral-dim, black)', fontSize: 49, fontFamily: 'Inter', fontWeight: '900', lineHeight: '58.80px', wordWrap: 'break-word'}}>
+
+          <div className="space-y-8 px-6">
+            <h2 className="text-[49px] font-black leading-[58.8px] text-black font-inter">
               {project.title}
-            </div>
-            <div className="Paraph" style={{alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', gap: 16, display: 'flex'}}>
-              <div style={{alignSelf: 'stretch', color: 'var(--text-neutral-dim, black)', fontSize: 25, fontFamily: 'Helvetica Neue', fontWeight: '700', textTransform: 'uppercase', lineHeight: '30px', wordWrap: 'break-word'}}>
+            </h2>
+
+            <div className="space-y-4">
+              <h3 className="text-[25px] font-bold uppercase leading-[30px] text-black font-['Helvetica_Neue']">
                 CONTEXTE ET ENJEUX
-              </div>
-              <div style={{alignSelf: 'stretch', color: 'var(--text-neutral-dim, black)', fontSize: 20, fontFamily: 'Inter', fontWeight: '400', lineHeight: '32px', wordWrap: 'break-word'}}>
+              </h3>
+              <p className="text-[20px] leading-[32px] text-black font-inter">
                 {project.context}
-              </div>
+              </p>
             </div>
-            <div className="Paraph" style={{alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', gap: 16, display: 'flex'}}>
-              <div style={{alignSelf: 'stretch', color: 'var(--text-neutral-dim, black)', fontSize: 25, fontFamily: 'Helvetica Neue', fontWeight: '700', textTransform: 'uppercase', lineHeight: '30px', wordWrap: 'break-word'}}>
+
+            <div className="space-y-4">
+              <h3 className="text-[25px] font-bold uppercase leading-[30px] text-black font-['Helvetica_Neue']">
                 OBJECTIFS DU PROJET
-              </div>
-              <div style={{alignSelf: 'stretch', color: 'var(--text-neutral-dim, black)', fontSize: 20, fontFamily: 'Inter', fontWeight: '400', lineHeight: '32px', wordWrap: 'break-word'}}>
+              </h3>
+              <div className="text-[20px] leading-[32px] text-black font-inter">
                 {project.objectives.map((objective, index) => (
-                  <div key={index}>{objective}<br/></div>
+                  <p key={index} className="mb-2">{objective}</p>
                 ))}
               </div>
             </div>
-            <div className="Paraph" style={{alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', gap: 16, display: 'flex'}}>
-              <div style={{alignSelf: 'stretch', color: 'var(--text-neutral-dim, black)', fontSize: 25, fontFamily: 'Helvetica Neue', fontWeight: '700', textTransform: 'uppercase', lineHeight: '30px', wordWrap: 'break-word'}}>
+
+            <div className="space-y-4">
+              <h3 className="text-[25px] font-bold uppercase leading-[30px] text-black font-['Helvetica_Neue']">
                 CONTRIBUTION ET EXPERTISE
-              </div>
-              <div style={{alignSelf: 'stretch', color: 'var(--text-neutral-dim, black)', fontSize: 20, fontFamily: 'Inter', fontWeight: '400', lineHeight: '32px', wordWrap: 'break-word'}}>
-                {project.contribution.analysis}
-                <br/><br/>
-                📐 Conception UX détaillée :<br/>
-                {project.contribution.uxDesign.map((item, index) => (
-                  <div key={index}>{item}<br/></div>
-                ))}
-                <br/>
-                🎨 Création d'une identité visuelle modernisée :<br/>
-                {project.contribution.visualIdentity.map((item, index) => (
-                  <div key={index}>{item}<br/></div>
-                ))}
-                <br/>
-                📲 Conception responsive :<br/>
-                {project.contribution.responsive}
+              </h3>
+              <div className="text-[20px] leading-[32px] text-black font-inter space-y-6">
+                <p>{project.contribution.analysis}</p>
+                
+                <div>
+                  <p className="mb-4">📐 Conception UX détaillée :</p>
+                  {project.contribution.uxDesign.map((item, index) => (
+                    <p key={index} className="mb-2">{item}</p>
+                  ))}
+                </div>
+
+                <div>
+                  <p className="mb-4">🎨 Création d'une identité visuelle modernisée :</p>
+                  {project.contribution.visualIdentity.map((item, index) => (
+                    <p key={index} className="mb-2">{item}</p>
+                  ))}
+                </div>
+
+                <div>
+                  <p className="mb-4">📲 Conception responsive :</p>
+                  <p>{project.contribution.responsive}</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div className="Close" style={{paddingLeft: 16, paddingRight: 16, paddingTop: 8, paddingBottom: 8, left: 1797, top: 32, position: 'absolute', background: 'var(--Primairy-300, #B6BFDE)', borderRadius: 100, outline: '1px var(--Primairy-300, #B6BFDE) solid', outlineOffset: '-1px', justifyContent: 'flex-start', alignItems: 'center', gap: 8, display: 'inline-flex'}} onClick={onClose}>
-        <div className="IconRight" style={{position: 'relative'}}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 18L18 6M6 6L18 18" stroke="var(--Primairy-400, #123293)" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </div>
-        <div style={{color: 'var(--Primairy-400, #123293)', fontSize: 13, fontFamily: 'Inter', fontWeight: '700', lineHeight: '15.60px', wordWrap: 'break-word'}}>
-          ESC
         </div>
       </div>
     </div>

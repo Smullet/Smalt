@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 import Image from "next/image"
 import { X } from "lucide-react"
 
@@ -21,95 +21,107 @@ interface ProjectModalProps {
   }
 }
 
-export function ProjectModal({ isOpen, onClose, project }: ProjectModalProps) {
+const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) => {
   if (!isOpen) return null
 
   return (
-    <AnimatePresence>
+    <div className="fixed inset-0 bg-white z-50 overflow-y-auto">
+      <div className="absolute top-4 right-4 flex items-center gap-2 text-sm">
+        <span>ESC</span>
+        <button
+          onClick={onClose}
+          className="hover:opacity-70 transition-opacity"
+        >
+          <X size={24} />
+        </button>
+      </div>
+
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-[#102D84] z-50 overflow-y-auto"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 20 }}
+        transition={{ duration: 0.3 }}
+        className="min-h-screen p-8"
       >
-        <div className="min-h-screen px-4 py-20">
-          <div className="max-w-6xl mx-auto">
-            <div className="flex justify-end mb-8">
-              <button
-                onClick={onClose}
-                className="text-white hover:opacity-70 transition-opacity"
-              >
-                <X size={32} />
-              </button>
-            </div>
+        <div className="max-w-7xl mx-auto">
+          {/* Image principale */}
+          <div className="w-full aspect-[16/9] relative mb-8">
+            <Image
+              src={project.images[0]}
+              alt={project.title}
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
 
-            <div className="space-y-12 text-white">
-              <h2 className="text-4xl sm:text-5xl font-bold">{project.title}</h2>
+          {/* Miniatures */}
+          <div className="flex gap-4 mb-12">
+            {project.images.slice(1).map((image, index) => (
+              <div key={index} className="w-32 aspect-[4/3] relative">
+                <Image
+                  src={image}
+                  alt={`Image ${index + 2} du projet`}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            ))}
+          </div>
 
-              <section className="space-y-6">
-                <h3 className="text-2xl font-bold">CONTEXTE ET ENJEUX</h3>
-                <p className="text-lg leading-relaxed">{project.context}</p>
-              </section>
+          <div className="space-y-12">
+            <h2 className="text-4xl sm:text-5xl font-bold text-[#102D84]">{project.title}</h2>
 
-              <section className="space-y-6">
-                <h3 className="text-2xl font-bold">OBJECTIFS DU PROJET</h3>
-                <ul className="space-y-2">
-                  {project.objectives.map((objective, index) => (
-                    <li key={index} className="text-lg leading-relaxed">
-                      {objective}
-                    </li>
-                  ))}
-                </ul>
-              </section>
+            <section className="space-y-6">
+              <h3 className="text-2xl font-bold text-[#102D84]">CONTEXTE ET ENJEUX</h3>
+              <p className="text-lg leading-relaxed text-neutral-900">{project.context}</p>
+            </section>
 
-              <section className="space-y-6">
-                <h3 className="text-2xl font-bold">CONTRIBUTION ET EXPERTISE</h3>
-                <div className="space-y-8">
-                  <p className="text-lg leading-relaxed">{project.contribution.analysis}</p>
-                  
-                  <div className="space-y-4">
-                    <h4 className="text-xl font-semibold">🔍 Conception UX détaillée :</h4>
-                    <ul className="list-disc pl-6 space-y-2">
-                      {project.contribution.uxDesign.map((item, index) => (
-                        <li key={index} className="text-lg leading-relaxed">{item}</li>
-                      ))}
-                    </ul>
-                  </div>
+            <section className="space-y-6">
+              <h3 className="text-2xl font-bold text-[#102D84]">OBJECTIFS DU PROJET</h3>
+              <ul className="space-y-2">
+                {project.objectives.map((objective, index) => (
+                  <li key={index} className="text-lg leading-relaxed text-neutral-900">
+                    {objective}
+                  </li>
+                ))}
+              </ul>
+            </section>
 
-                  <div className="space-y-4">
-                    <h4 className="text-xl font-semibold">🎨 Création d'une identité visuelle modernisée :</h4>
-                    <ul className="list-disc pl-6 space-y-2">
-                      {project.contribution.visualIdentity.map((item, index) => (
-                        <li key={index} className="text-lg leading-relaxed">{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="space-y-4">
-                    <h4 className="text-xl font-semibold">📱 Conception responsive :</h4>
-                    <p className="text-lg leading-relaxed">{project.contribution.responsive}</p>
-                  </div>
+            <section className="space-y-6">
+              <h3 className="text-2xl font-bold text-[#102D84]">CONTRIBUTION ET EXPERTISE</h3>
+              <div className="space-y-8">
+                <p className="text-lg leading-relaxed text-neutral-900">{project.contribution.analysis}</p>
+                
+                <div className="space-y-4">
+                  <h4 className="text-xl font-semibold text-[#102D84]">🔍 Conception UX détaillée :</h4>
+                  <ul className="list-disc pl-6 space-y-2">
+                    {project.contribution.uxDesign.map((item, index) => (
+                      <li key={index} className="text-lg leading-relaxed text-neutral-900">{item}</li>
+                    ))}
+                  </ul>
                 </div>
-              </section>
 
-              <section className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {project.images.map((image, index) => (
-                    <div key={index} className="aspect-[4/3] relative rounded-lg overflow-hidden">
-                      <Image
-                        src={image}
-                        alt={`Image ${index + 1} du projet`}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  ))}
+                <div className="space-y-4">
+                  <h4 className="text-xl font-semibold text-[#102D84]">🎨 Création d'une identité visuelle modernisée :</h4>
+                  <ul className="list-disc pl-6 space-y-2">
+                    {project.contribution.visualIdentity.map((item, index) => (
+                      <li key={index} className="text-lg leading-relaxed text-neutral-900">{item}</li>
+                    ))}
+                  </ul>
                 </div>
-              </section>
-            </div>
+
+                <div className="space-y-4">
+                  <h4 className="text-xl font-semibold text-[#102D84]">📱 Conception responsive :</h4>
+                  <p className="text-lg leading-relaxed text-neutral-900">{project.contribution.responsive}</p>
+                </div>
+              </div>
+            </section>
           </div>
         </div>
       </motion.div>
-    </AnimatePresence>
+    </div>
   )
-} 
+}
+
+export default ProjectModal 

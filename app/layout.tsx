@@ -1,50 +1,48 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter, Be_Vietnam_Pro, Epilogue } from "next/font/google"
-import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-})
-
-const beVietnamPro = Be_Vietnam_Pro({
-  subsets: ["latin"],
-  weight: ["400", "600"],
-  variable: "--font-be-vietnam-pro",
-  display: "swap",
-})
-
-const epilogue = Epilogue({
-  subsets: ["latin"],
-  weight: ["600"],
-  variable: "--font-epilogue",
-  display: "swap",
-})
+import './globals.css'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "Smalt - Studio Digital",
-  description:
-    "Smalt accompagne les TPE, PME, startups et collectivités dans la création de solutions numériques utiles, humaines et adaptées à leurs besoins.",
-    generator: 'v0.dev'
+  title: 'Studio Smalt - Design agile, social marketing, conseil business',
+  description: 'Studio Smalt accompagne les équipes produit, tech et marketing dans la création d\'interfaces claires, utiles et testées.',
+  keywords: ['design', 'UX', 'UI', 'product design', 'web design', 'facilitation', 'freelance'],
+  authors: [{ name: 'Salomé Mullet' }],
+  creator: 'Salomé Mullet',
+  publisher: 'Studio Smalt',
+  robots: 'index, follow',
+  openGraph: {
+    type: 'website',
+    locale: 'fr_FR',
+    url: 'https://studio-smalt.fr',
+    siteName: 'Studio Smalt',
+    title: 'Studio Smalt - Design agile, social marketing, conseil business',
+    description: 'Studio Smalt accompagne les équipes produit, tech et marketing dans la création d\'interfaces claires, utiles et testées.',
+    images: [
+      {
+        url: '/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Studio Smalt',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Studio Smalt - Design agile, social marketing, conseil business',
+    description: 'Studio Smalt accompagne les équipes produit, tech et marketing dans la création d\'interfaces claires, utiles et testées.',
+    images: ['/images/og-image.jpg'],
+    creator: '@StudioSmalt',
+  },
 }
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
-    <html lang="fr" suppressHydrationWarning>
-      <head>
-        <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/helvetica-neue-9" />
-      </head>
-      <body className={`${inter.variable} ${beVietnamPro.variable} ${epilogue.variable}`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          {children}
-        </ThemeProvider>
+    <html lang="fr" className="scroll-smooth">
+      <body className="antialiased">
+        {children}
       </body>
     </html>
   )

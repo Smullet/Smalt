@@ -5,15 +5,17 @@
 @layer base {
   @font-face {
     font-family: 'Helvetica Neue';
-    src: url('/fonts/HelveticaNeueBold.otf') format('opentype');
-    font-weight: 700;
+    src: url('/fonts/HelveticaNeue-Light.woff2') format('woff2'),
+         url('/fonts/HelveticaNeue-Light.woff') format('woff');
+    font-weight: 300;
     font-style: normal;
     font-display: swap;
   }
 
   @font-face {
     font-family: 'Helvetica Neue';
-    src: url('/fonts/HelveticaNeueRoman.otf') format('opentype');
+    src: url('/fonts/HelveticaNeue-Regular.woff2') format('woff2'),
+         url('/fonts/HelveticaNeue-Regular.woff') format('woff');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -21,7 +23,8 @@
 
   @font-face {
     font-family: 'Helvetica Neue';
-    src: url('/fonts/HelveticaNeueMedium.otf') format('opentype');
+    src: url('/fonts/HelveticaNeue-Medium.woff2') format('woff2'),
+         url('/fonts/HelveticaNeue-Medium.woff') format('woff');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -29,7 +32,17 @@
 
   @font-face {
     font-family: 'Helvetica Neue';
-    src: url('/fonts/HelveticaNeueBlack.otf') format('opentype');
+    src: url('/fonts/HelveticaNeue-Bold.woff2') format('woff2'),
+         url('/fonts/HelveticaNeue-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Helvetica Neue';
+    src: url('/fonts/HelveticaNeue-Black.woff2') format('woff2'),
+         url('/fonts/HelveticaNeue-Black.woff') format('woff');
     font-weight: 900;
     font-style: normal;
     font-display: swap;
@@ -42,7 +55,7 @@
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221 47% 32%;
+    --primary: 221.2 83.2% 53.3%;
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -54,41 +67,30 @@
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 221 47% 32%;
+    --ring: 221.2 83.2% 53.3%;
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 224 71% 4%;
-    --foreground: 213 31% 91%;
-
-    --muted: 223 47% 11%;
-    --muted-foreground: 215.4 16.3% 56.9%;
-
-    --accent: 216 34% 17%;
-    --accent-foreground: 210 40% 98%;
-
-    --popover: 224 71% 4%;
-    --popover-foreground: 215 20.2% 65.1%;
-
-    --border: 216 34% 17%;
-    --input: 216 34% 17%;
-
-    --card: transparent;
-    --card-foreground: 213 31% 91%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 1.2%;
-
-    --secondary: 222.2 47.4% 11.2%;
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
-    --destructive: 0 63% 31%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
-    --ring: 216 34% 17%;
-
-    --radius: 0.5rem;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -215,4 +217,26 @@ button,
 
 @layer utilities {
   /* Suppression des anciennes animations */
+}
+
+/* Custom Animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Custom Utilities */
+.text-balance {
+  text-wrap: balance;
 }

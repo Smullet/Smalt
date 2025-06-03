@@ -44,6 +44,12 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        smalt: {
+          primary: "#1a237e",    // Bleu principal
+          secondary: "#ffd700",  // Jaune
+          dark: "#0f0f0f",      // Noir
+          light: "#f5f5f5",     // Gris clair
+        }
       },
       fontFamily: {
         "body-regular-l": "var(--body-regular-l-font-family)",
@@ -67,11 +73,30 @@ const config: Config = {
         ],
         helvetica: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
       },
-      boxShadow: { "shadow-2xl": "var(--shadow-2xl)" },
+      fontSize: {
+        'display-xl': ['4rem', { lineHeight: '1.2', fontWeight: '900' }],
+        'display-lg': ['3.5rem', { lineHeight: '1.2', fontWeight: '900' }],
+        'display-md': ['3rem', { lineHeight: '1.2', fontWeight: '900' }],
+        'heading-lg': ['2.5rem', { lineHeight: '1.3', fontWeight: '700' }],
+        'heading-md': ['2rem', { lineHeight: '1.3', fontWeight: '700' }],
+        'body-lg': ['1.25rem', { lineHeight: '1.6' }],
+        'body-md': ['1rem', { lineHeight: '1.6' }],
+      },
+      spacing: {
+        '18': '4.5rem',
+        '22': '5.5rem',
+      },
+      boxShadow: {
+        "shadow-2xl": "var(--shadow-2xl)",
+        'card': '0px 4px 20px rgba(0, 0, 0, 0.1)',
+        'button': '2px 2px 0px rgba(0, 0, 0, 1)',
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        xl: '1rem',
+        '2xl': '1.5rem',
       },
       keyframes: {
         "accordion-down": {

@@ -3,12 +3,18 @@ const nextConfig = {
   output: 'export',
   basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
   assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH || '',
-  trailingSlash: true,
   images: {
     unoptimized: true,
-    domains: ['github.com'],
-    loader: 'custom',
-    loaderFile: './app/image-loader.js',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
+  },
+  webpack: (config) => {
+    config.resolve.fallback = { fs: false, path: false };
+    return config;
   },
   eslint: {
     ignoreDuringBuilds: true,

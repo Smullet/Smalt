@@ -5,6 +5,7 @@ const nextConfig = {
   assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH || '',
   images: {
     unoptimized: true,
+    domains: ['github.com'],
   },
   eslint: {
     ignoreDuringBuilds: true,
